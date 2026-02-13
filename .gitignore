@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+.venv/
+*.log
+test_stuff.py
+
+# PyCharm
+.idea/
+
+# Test images
+*.nii.gz
+
+# venv
+ggems-env/
