@@ -25,6 +25,11 @@ timepoints_df.dropna(subset='T0', inplace=True)
 for index, row in timepoints_df.iterrows():
     patient_id = row["NewID"]
     cycle = row["Cycle"]
+
+    if os.path.isfile(os.path.join(path, "TIA", f'{patient_id}_{cycle}_TIA_Map.mhd')):
+        print(f"TIA map for {patient_id}_{cycle} already exists!")
+        continue
+
     print("="* 64, patient_id, cycle)
 
     data = {
@@ -52,7 +57,7 @@ for index, row in timepoints_df.iterrows():
     reference_arr = np.asarray(reference_timepoint)
     # saving the first available timepoint's CT in .mhd
     ct = itk.imread(ct_paths[0])
-    ct = resample_to_reference(ct, reference_timepoint)
+    ct = resample_to_reference(ct, reference_timepoint, ct=True)
     itk.imwrite(ct, os.path.join(path, "TIA_CT", f'{patient_id}_{cycle}_CT.mhd'))
 
     # getting mask of foreground

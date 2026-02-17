@@ -4,10 +4,10 @@ from utilities import *
 import shutil
 
 
-# Time-integrated activity map
-tia_file = r"D:\Pluvicto\TIA\PLV0006_C1_TIA_Map.mhd"
+# Time-integrated activity maps
+tia_file = r""
 # Attenuation map
-ct_file = r"D:\Pluvicto\TIA_CT\PLV0006_C1_CT.mhd"
+ct_file = r""
 # Path in which to save patient dosimetry folder
 out_path = r"D:\Pluvicto\DoseMaps"
 
@@ -39,7 +39,6 @@ nx, ny, nz = size
 
 # 2. HARDWARE SETUP: Target the Blackwell GPU
 opencl_manager = GGEMSOpenCLManager()
-#print(dir(opencl_manager)) # This will list every method available to you
 # Forces simulation to bypass Intel iGPU and use NVIDIA
 opencl_manager.set_device_to_activate('gpu', 'nvidia')
 opencl_manager.print_infos()
@@ -102,8 +101,8 @@ seed = 777
 ggems.initialize(seed)
 ggems.run()
 
-# ------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 # 8: Exit safely
-dosimetry.delete()
 ggems.delete()
+dosimetry.delete()
 exit()
